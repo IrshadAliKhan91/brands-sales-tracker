@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Sales Tracker | Premium Deals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #f43f5e;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #fb7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Search & Filters */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            color: white;
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            outline: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .filter-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+        }
+
+        .brand-filters {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 100px;
+            color: var(--text);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Grid */
+        .sales-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card */
+        .sale-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .sale-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .sale-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .brand-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            height: 2.8rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sale-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #4f46e5;
+            filter: brightness(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading */
+        #loader {
+            text-align: center;
+            padding: 5rem;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Brand Sales Tracker</h1>
+            <p class="subtitle">PREMIUM SALES FROM BIG PAKISTANI BRANDS</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="search" class="search-box" placeholder="Search products or brands...">
+        </div>
+
+        <div class="filter-container">
+            <span class="filter-label">Explore Brands:</span>
+            <div class="brand-filters">
+                <button class="filter-btn active" data-brand="all">All Brands</button>
+                <button class="filter-btn" data-brand="Khaadi">Khaadi</button>
+                <button class="filter-btn" data-brand="Sapphire">Sapphire</button>
+                <button class="filter-btn" data-brand="J.">J.</button>
+                <button class="filter-btn" data-brand="Gul Ahmed / Ideas">Ideas</button>
+                <button class="filter-btn" data-brand="Sana Safinaz">Sana Safinaz</button>
+                <button class="filter-btn" data-brand="Alkaram Studio">Alkaram</button>
+                <button class="filter-btn" data-brand="Ethnic">Ethnic</button>
+                <button class="filter-btn" data-brand="Outfitters">Outfitters</button>
+                <button class="filter-btn" data-brand="Maria B.">Maria B.</button>
+            </div>
+        </div>
+
+        <div id="loader">Discovering the best deals for you...</div>
+        <div class="sales-grid" id="grid"></div>
+    </div>
+
+    <script src="../data.js" onerror="this.onerror=null; this.src='data.js'; document.getElementById('loader').innerHTML='Data Not Found<br>The data.js file could not be loaded.<br><br>Please run python scraper/main.py first to generate the deals.';"></script>
+    <script>
+        let allProducts = window.salesData || [];
+        const grid = document.getElementById('grid');
+        const loader = document.getElementById('loader');
+        const searchInput = document.getElementById('search');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        async function init() {
+            try {
+                if (!window.salesData) {
+                    throw new Error("data.js not loaded properly");
+                }
+                
+                // Sort by date (newest first)
+                allProducts.sort((a, b) => new Date(b.scraped_at) - new Date(a.scraped_at));
+                
+                loader.style.display = 'none';
+                render(allProducts);
+            } catch (error) {
+                loader.innerHTML = "Error loading deals. Please ensure the scraper has run.";
+                console.error(error);
+            }
+        }
+
+        function calculateDiscount(original, sale) {
+            try {
+                // Remove everything except digits
+                const o = parseFloat(original.replace(/\D/g, ''));
+                const s = parseFloat(sale.replace(/\D/g, ''));
+                if (o > 0 && s > 0 && o > s) {
+                    return Math.round(((o - s) / o) * 100);
+                }
+            } catch(e) {}
+            return 0;
+        }
+
+        function render(products) {
+            grid.innerHTML = products.map((p, index) => `
+                <div class="sale-card" style="animation-delay: ${index * 0.05}s">
+                    <div class="img-container">
+                        <img src="${p.image_url}" class="product-img" loading="lazy" onerror="this.src='https://via.placeholder.com/400x600?text=No+Image'">
+                        <span class="brand-badge">${p.brand}</span>
+                        <span class="discount-badge">${p.discount_percentage || calculateDiscount(p.original_price, p.sale_price)}% OFF</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="product-title">${p.title}</h3>
+                        <div class="price-row">
+                            <span class="sale-price">${p.sale_price}</span>
+                            ${p.original_price !== "N/A" ? `<span class="original-price">${p.original_price}</span>` : ''}
+                        </div>
+                        <a href="${p.url}" target="_blank" class="buy-btn">View on Brand Site</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtering & Search
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeBrand = document.querySelector('.filter-btn.active').dataset.brand;
+
+            const filtered = allProducts.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(searchTerm) || 
+                                    p.brand.toLowerCase().includes(searchTerm);
+                const matchesBrand = activeBrand === 'all' || p.brand === activeBrand;
+                return matchesSearch && matchesBrand;
+            });
+            render(filtered);
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyFilters();
+            });
+        });
+
+        init();
+    </script>
+</body>
+</html>
