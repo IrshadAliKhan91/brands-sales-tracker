@@ -2,7 +2,7 @@ Brands Sales Tracker
 
 [![Automated Sales Scraper](https://github.com/IrshadAliKhan91/brands-sales-tracker/actions/workflows/scrape.yml/badge.svg)](https://github.com/IrshadAliKhan91/brands-sales-tracker/actions/workflows/scrape.yml)
 
-A static deal-discovery dashboard that tracks discounted products from dozens of Pakistani fashion, footwear, and lifestyle brands. A scheduled GitHub Actions workflow runs the Python scraper daily, refreshes the tracked product data, and updates the live dashboard.
+A static deal-discovery dashboard that tracks discounted products from dozens of fashion, footwear, and lifestyle brands. A scheduled GitHub Actions workflow runs the Python scraper daily, refreshes the tracked product data, and updates the live dashboard.
 
 **Live dashboard:** [irshadalikhan91.github.io/brands-sales-tracker](https://irshadalikhan91.github.io/brands-sales-tracker/)
 
