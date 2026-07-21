@@ -1,4 +1,4 @@
-# Pakistan Brands Sales Tracker
+Brands Sales Tracker
 
 [![Automated Sales Scraper](https://github.com/IrshadAliKhan91/brands-sales-tracker/actions/workflows/scrape.yml/badge.svg)](https://github.com/IrshadAliKhan91/brands-sales-tracker/actions/workflows/scrape.yml)
 
