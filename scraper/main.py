@@ -44,7 +44,6 @@ from brands.jolly import JollyScraper
 from brands.breakout import BreakoutScraper
 from brands.beechtree import BeechtreeScraper
 import json
-import os
 
 def main():
     scrapers = [
@@ -139,22 +138,14 @@ def main():
     
     all_products = unique_products
 
-    # Ensure data directory exists in frontend
-    os.makedirs('frontend/public/data', exist_ok=True)
-    
-    # Save as JSON (original method)
-    output_path = 'frontend/public/data/sales_data.json'
-    with open(output_path, 'w') as f:
-        json.dump(all_products, f, indent=2)
-
-    # Save as JS for local browser access (bypasses SOP)
+    # Save browser-ready data alongside the static GitHub Pages dashboard.
     output_js = 'data.js'
     with open(output_js, 'w') as f:
         f.write("window.salesData = ")
         json.dump(all_products, f, indent=2)
         f.write(";")
     
-    print(f"Successfully saved {len(all_products)} products to {output_path} and {output_js}")
+    print(f"Successfully saved {len(all_products)} products to {output_js}")
 
 if __name__ == "__main__":
     main()

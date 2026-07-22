@@ -21,7 +21,7 @@ A static deal-discovery dashboard that tracks discounted products from dozens of
 Daily GitHub Actions run
   -> Python brand scrapers
   -> normalization and de-duplication
-  -> data.js + frontend/public/data/sales_data.json
+  -> data.js
   -> automated commit to main
   -> GitHub Pages serves the refreshed dashboard
 ```
@@ -35,8 +35,7 @@ The workflow is scheduled for **00:00 UTC daily** and can also be started manual
 scraper/main.py                  Orchestrates all brand scrapers and writes output
 scraper/brands/                  Shared scraper logic and brand-specific implementations
 index.html                       GitHub Pages dashboard
-data.js                          Browser-ready generated product dataset
-frontend/                        Alternate local dashboard and JSON output
+data.js                          Generated browser-ready product dataset
 ```
 
 ## Run locally

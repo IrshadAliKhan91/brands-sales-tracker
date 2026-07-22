@@ -7,8 +7,7 @@
 | `scraper/brands/base_scraper.py` | Shared HTTP, price parsing, discount calculation, and common HTML/Shopify extraction behavior |
 | `scraper/brands/*.py` | Brand-specific source URLs and parsing rules |
 | `scraper/main.py` | Runs every scraper, handles individual failures, de-duplicates products, and writes output data |
-| `data.js` | Generated browser-ready dataset loaded by the root dashboard |
-| `frontend/public/data/sales_data.json` | Generated JSON dataset for the alternate frontend |
+| `data.js` | Generated browser-ready dataset loaded by the dashboard |
 | `index.html` | Static dashboard used by GitHub Pages |
 | `.github/workflows/scrape.yml` | Scheduled automation and generated-data commit step |
 
@@ -35,7 +34,7 @@ The orchestrator removes duplicates using a normalized combination of brand, tit
 
 ## Scheduled run
 
-The GitHub Actions workflow runs daily at `00:00 UTC` and also supports `workflow_dispatch` for manual runs. It installs the requirements, runs `scraper/main.py`, and commits the two generated data files when they change.
+The GitHub Actions workflow runs daily at `00:00 UTC` and also supports `workflow_dispatch` for manual runs. It installs the requirements, runs `scraper/main.py`, and commits the generated `data.js` file when it changes.
 
 ## Failure behavior
 
