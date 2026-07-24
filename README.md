@@ -11,7 +11,7 @@ A static deal-discovery dashboard that tracks discounted products from dozens of
 - Collects sale products from supported brand websites
 - Extracts product title, current price, original price, calculated discount, image, and source URL
 - Filters duplicate listings before publishing the dataset
-- Generates both JSON and browser-ready JavaScript data files
+- Generates a browser-ready JavaScript data file for the dashboard
 - Provides a searchable dashboard with brand filters and direct links to source products
 - Refreshes the public dataset automatically through GitHub Actions
 
